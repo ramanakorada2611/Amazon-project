@@ -56,7 +56,7 @@ products.forEach((eachProduct)=>{
     </div>
 
     <div class="product-quantity-container">
-        <select>
+        <select class="js-cart-selector-${eachProduct.id}">
         <option selected value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -92,7 +92,9 @@ document.querySelector('.js-products').innerHTML=product
 document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
  button.addEventListener('click',()=>{
     // for getting data from use button and dataset and kehab case covert to camelcase so i wrote productId
-    const productId = button.dataset.productId
+    // const productId = button.dataset.productId
+
+    const {productId} = button.dataset // destructuring
 
     //if you find same product quatnity increase
     let matchingItem;
@@ -106,17 +108,25 @@ document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
     }
     else{
         cart.push({
-            productId:productId,
+            // productId:productId,
+            productId,//shorthand property if proeprty and value  same
             quantity:1
         })
     }
     //increse quantity in cart
-    let cartQuantity=0;
-    cart.forEach((item)=>{
-       cartQuantity+=item.quantity
-    })
-    document.querySelector('.js-cart-quantity').innerHTML=cartQuantity
+    // let cartQuantity=0;
+    // cart.forEach((item)=>{
+    //    cartQuantity+=item.quantity
+    // })
+    // document.querySelector('.js-cart-quantity').innerHTML=cartQuantity
     // console.log(cartQuantity)
     // console.log(cart)
+   
+    // selector quantity increase code
+    const selectorValue = document.querySelector(`.js-cart-selector-${productId}`).value
+    // console.log(selectorValue)"3"
+    const selectorNumber = Number(selectorValue)
+    document.querySelector('.js-cart-quantity').innerHTML=selectorNumber
+
  })
 })
