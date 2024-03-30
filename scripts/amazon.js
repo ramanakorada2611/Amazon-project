@@ -29,6 +29,8 @@
 // ]
  
 // i am taking products from data folder
+import {products} from "../data/products.js"
+import {cart} from '../data/cart.js'
 
 let product=''
 products.forEach((eachProduct)=>{
