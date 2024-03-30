@@ -30,7 +30,8 @@
  
 // i am taking products from data folder
 import {products} from "../data/products.js"
-import {cart} from '../data/cart.js'
+import {cart, cartQuantity} from '../data/cart.js'
+import { currency } from "./utils/money.js"
 
 let product=''
 products.forEach((eachProduct)=>{
@@ -54,7 +55,7 @@ products.forEach((eachProduct)=>{
     </div>
 
     <div class="product-price">
-        ${(eachProduct.priceCents/100).toFixed(2)}
+        ${currency(eachProduct.priceCents)}
     </div>
 
     <div class="product-quantity-container">
@@ -88,6 +89,26 @@ products.forEach((eachProduct)=>{
 
 // console.log(product)
 
+
+function updatecartQuantity(productId){
+      //if you find same product quatnity increase
+    //increse quantity in cart
+// let cartQuantity=0;
+// cart.forEach((item)=>{
+//    cartQuantity+=item.quantity
+// })
+// document.querySelector('.js-cart-quantity').innerHTML=cartQuantity
+// console.log(cartQuantity)
+// console.log(cart)
+
+// selector quantity increase code
+const selectorValue = document.querySelector(`.js-cart-selector-${productId}`).value
+// console.log(selectorValue)"3"
+const selectorNumber = Number(selectorValue)
+document.querySelector('.js-cart-quantity').innerHTML=selectorNumber
+}
+
+
 // for getting product name or any data we have use data  in element
 document.querySelector('.js-products').innerHTML=product
 
@@ -98,37 +119,8 @@ document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
 
     const {productId} = button.dataset // destructuring
 
-    //if you find same product quatnity increase
-    let matchingItem;
-    cart.forEach((item)=>{
-        if(productId===item.productId){
-          matchingItem=item
-        }
-    })
-    if(matchingItem){
-        matchingItem.quantity+=1
-    }
-    else{
-        cart.push({
-            // productId:productId,
-            productId,//shorthand property if proeprty and value  same
-            quantity:1
-        })
-    }
-    //increse quantity in cart
-    // let cartQuantity=0;
-    // cart.forEach((item)=>{
-    //    cartQuantity+=item.quantity
-    // })
-    // document.querySelector('.js-cart-quantity').innerHTML=cartQuantity
-    // console.log(cartQuantity)
-    // console.log(cart)
-   
-    // selector quantity increase code
-    const selectorValue = document.querySelector(`.js-cart-selector-${productId}`).value
-    // console.log(selectorValue)"3"
-    const selectorNumber = Number(selectorValue)
-    document.querySelector('.js-cart-quantity').innerHTML=selectorNumber
-
+  
+    cartQuantity(productId)
+    updatecartQuantity(productId)
  })
 })
