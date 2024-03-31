@@ -9,7 +9,7 @@
 // cart data storing in localstorage from dom
 export let cart=JSON.parse(localStorage.getItem('cart'))
 if(!cart){
-    [{
+    cart=[{
             productId:"e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
             quantity:2
     },{
@@ -20,7 +20,7 @@ if(!cart){
  function saveLocalStorage(){
     localStorage.setItem('cart',JSON.stringify(cart))
  }
-export function cartQuantity(productId){
+export function cartQuantity(productId,selectorNumber){
     let matchingItem;
     cart.forEach((cartItem)=>{
         if(productId===cartItem.productId){
@@ -28,13 +28,15 @@ export function cartQuantity(productId){
         }
     })
     if(matchingItem){
-        matchingItem.quantity+=1
+        // matchingItem.quantity+=1
+        matchingItem.quantity=selectorNumber
     }
     else{
         cart.push({
             // productId:productId,
             productId,//shorthand property if proeprty and value  same
-            quantity:1
+            // quantity:1
+            quantity:selectorNumber
         })
     }
 

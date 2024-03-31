@@ -90,22 +90,17 @@ products.forEach((eachProduct)=>{
 // console.log(product)
 
 
-function updatecartQuantity(productId){
+function updatecartQuantity(){
       //if you find same product quatnity increase
     //increse quantity in cart
-// let cartQuantity=0;
-// cart.forEach((item)=>{
-//    cartQuantity+=item.quantity
-// })
-// document.querySelector('.js-cart-quantity').innerHTML=cartQuantity
+let cartQuantity=0;
+cart.forEach((item)=>{
+   cartQuantity+=item.quantity
+})
+document.querySelector('.js-cart-quantity').innerHTML=cartQuantity
 // console.log(cartQuantity)
 // console.log(cart)
 
-// selector quantity increase code
-const selectorValue = document.querySelector(`.js-cart-selector-${productId}`).value
-// console.log(selectorValue)"3"
-const selectorNumber = Number(selectorValue)
-document.querySelector('.js-cart-quantity').innerHTML=selectorNumber
 }
 
 
@@ -119,8 +114,12 @@ document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
 
     const {productId} = button.dataset // destructuring
 
-  
-    cartQuantity(productId)
-    updatecartQuantity(productId)
+      // selector quantity increase code
+    const selectorValue = document.querySelector(`.js-cart-selector-${productId}`).value
+    // // console.log(selectorValue)"3"
+    const selectorNumber = Number(selectorValue)//3
+    console.log(selectorNumber)
+    cartQuantity(productId,selectorNumber)
+    updatecartQuantity()
  })
 })
