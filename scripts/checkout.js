@@ -1,4 +1,4 @@
-import {cart, removeCartProducts} from '../data/cart.js'
+import {cart, removeCartProducts,updateDeliveryOption} from '../data/cart.js'
 import {products} from "../data/products.js"
 import { currency } from './utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'
@@ -15,13 +15,14 @@ cart.forEach((cartItem)=>{
     // console.log(matchingItem)
 
     const deliveryOptionId = cartItem.deliveryOptionId
+    console.log(deliveryOptionId)
     let deliveryOption ;
     deliveryOptions.forEach((option)=>{
         if(deliveryOptionId===option.id){
             deliveryOption = option
         }
     })
-
+   console.log(deliveryOption)
     const todayDate = dayjs()
     const addDays = todayDate.add(deliveryOption.deliveryDays,'days')
     const deliveryDate =  addDays.format('dddd, MMMM D')
@@ -57,7 +58,7 @@ cart.forEach((cartItem)=>{
                     </div>
                 </div>
 
-                <div class="delivery-options">
+                <div class="delivery-options ">
                     <div class="delivery-options-title">
                     Choose a delivery option:
                     </div>
@@ -99,7 +100,9 @@ function deliveryOptionFun(matchingItem,cartItem){
         const deliveryDate =  addDays.format('dddd, MMMM D')
         const free = deliveryOption.priceCents===0 ? 'FREE' :`$${currency(deliveryOption.priceCents)}`
         const isChecked =  deliveryOption.id === cartItem.deliveryOptionId
-        html+= `<div class="delivery-option ">
+        html+= `<div class="delivery-option js-delivery-option"
+        data-product-id=${matchingItem.id}
+        data-delivery-option-id = ${deliveryOption.id}>
         <input type="radio" ${isChecked ? 'checked':''}
             class="delivery-option-input"
             name="delivery-option-${matchingItem.id}">
@@ -116,6 +119,13 @@ function deliveryOptionFun(matchingItem,cartItem){
     return html
 }
 
+
+document.querySelectorAll('.js-delivery-option').forEach((element)=>{
+    element.addEventListener('click',()=>{
+        const {productId,deliveryOptionId} = element.dataset
+        updateDeliveryOption(productId,deliveryOptionId)
+    })
+})
 
 
 
