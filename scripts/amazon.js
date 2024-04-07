@@ -90,7 +90,7 @@ products.forEach((eachProduct)=>{
 // console.log(product)
 
 
-function updatecartQuantity(){
+export function updatecartQuantity(){
       //if you find same product quatnity increase
     //increse quantity in cart
 let cartQuantity=0;
@@ -104,8 +104,9 @@ document.querySelector('.js-cart-quantity').innerHTML=cartQuantity
 }
 
 
+
 // for getting product name or any data we have use data  in element
-document.querySelector('.js-products').innerHTML=product
+document.querySelector('.js-products').innerHTML = product;
 
 document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
  button.addEventListener('click',()=>{
