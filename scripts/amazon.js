@@ -103,7 +103,7 @@ document.querySelector('.js-cart-quantity').innerHTML=cartQuantity
 
 }
 
-
+updatecartQuantity()
 
 // for getting product name or any data we have use data  in element
 document.querySelector('.js-products').innerHTML = product;

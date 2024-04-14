@@ -54,8 +54,6 @@ cart.forEach((cartItem)=>{
                     </span>
                     <span class="update-quantity-link link-primary js-update-link " data-product-id=${matchingItem.id}>
                         Update
-                        <input class="quantity-input">
-                        <span class="save-quantity-link">Save</span>
                     </span>
                     <span class="delete-quantity-link link-primary js-delete-link" data-product-id=${matchingItem.id}>
                         Delete
@@ -137,31 +135,6 @@ function deliveryOptionFun(matchingItem,cartItem){
     
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function updatecartQuantity(){
